@@ -10,11 +10,13 @@ interface HomeContract {
         fun hideErrorLoadingGists()
         fun showToastErrorLoadingGists()
         fun addGistsToList(gists: List<Gist>)
+        fun openGist(gist: Gist)
     }
 
     interface Presenter {
         fun attachView(view: View)
         fun detachView()
         fun loadGists()
+        fun gistSelected(gist: Gist)
     }
 }

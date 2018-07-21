@@ -1,6 +1,7 @@
 package br.com.rads.gistnator.home
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import br.com.rads.gistnator.R
+import br.com.rads.gistnator.detail.DetailActivity
 import br.com.rads.gistnator.gist.Gist
 import br.com.rads.gistnator.gist.GistServiceApi
 import br.com.rads.gistnator.rx.SchedulerProviderImpl
@@ -31,8 +33,6 @@ class HomeFragment : Fragment(), HomeContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRecyclerView()
-
         val retrofit = Retrofit.Builder()
                 .baseUrl("https://api.github.com")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -41,17 +41,17 @@ class HomeFragment : Fragment(), HomeContract.View {
 
         val gistApi = retrofit.create(GistServiceApi::class.java)
         val homePresenter = HomePresenter(gistApi, SchedulerProviderImpl())
-        homePresenter.attachView(this)
-        homePresenter.loadGists()
-    }
 
-    private fun setupRecyclerView() {
-        adater = HomeAdapter(mutableListOf())
+        adater = HomeAdapter(mutableListOf()) { homePresenter.gistSelected(it) }
         context?.let {
             home_recyclerView.layoutManager = LinearLayoutManager(it, LinearLayoutManager.VERTICAL, false)
             home_recyclerView.adapter = adater
         }
+
+        homePresenter.attachView(this)
+        homePresenter.loadGists()
     }
+
 
     //region HomeContract.View
     override fun hideMainProgress() {
@@ -70,6 +70,10 @@ class HomeFragment : Fragment(), HomeContract.View {
     override fun addGistsToList(gists: List<Gist>) {
         home_recyclerView.visibility = View.VISIBLE
         adater?.addAll(gists)
+    }
+
+    override fun openGist(gist: Gist) {
+        startActivity(Intent(activity, DetailActivity::class.java).putExtra("GIST_EXTRA",gist))
     }
     //endregion
 

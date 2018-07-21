@@ -11,7 +11,8 @@ import br.com.rads.gistnator.gist.Gist
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cell_home_gist.view.*
 
-class HomeAdapter(private val gists: MutableList<Gist>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(private val gists: MutableList<Gist>,
+                  private val action: (Gist) -> Unit) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.cell_home_gist, parent, false)
@@ -21,13 +22,14 @@ class HomeAdapter(private val gists: MutableList<Gist>) : RecyclerView.Adapter<H
     override fun getItemCount(): Int = gists.size
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.itemView.gist_owner_name_textView.text = gists[position].ownerName
-        holder.itemView.gist_name_textView.text = gists[position].gistName
-        holder.itemView.gist_language_textView.text = gists[position].language
-        Picasso.get().load(gists[position].avatarUrl).into(holder.itemView.gist_avatar_imageView)
+        val gist = gists[position]
+        holder.itemView.gist_owner_name_textView.text = gist.ownerName
+        holder.itemView.gist_name_textView.text = gist.gistName
+        holder.itemView.gist_language_textView.text = gist.language
+        Picasso.get().load(gist.avatarUrl).into(holder.itemView.gist_avatar_imageView)
 
         holder.itemView.setOnClickListener {
-            Log.d("TESTE", "ok selecionado")
+            action(gist)
         }
     }
 

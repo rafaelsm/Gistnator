@@ -41,4 +41,8 @@ class HomePresenter(private val service: GistServiceApi,
                         })
     }
 
+    override fun gistSelected(gist: Gist) {
+        view?.openGist(gist)
+    }
+
 }
