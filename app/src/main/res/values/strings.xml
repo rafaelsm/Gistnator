@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Gistnator</string>
+
+    <!-- bottom navigation view -->
+    <string name="title_home">Home</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_about">About</string>
+    <string name="cd_user_image">User image</string>
+
+</resources>
