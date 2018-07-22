@@ -7,12 +7,13 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 import retrofit2.http.Url
 
 interface GistServiceApi {
 
     @GET("/gists/public")
-    fun listGists(): Observable<List<GistsResponse>>
+    fun listGists(@Query("page") page: Int = 0, @Query("per_page") paginateSize: Int = 30): Observable<List<GistsResponse>>
 
     @GET
     fun rawGist(@Url url: String): Observable<ResponseBody>

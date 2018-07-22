@@ -57,11 +57,12 @@ class HomeFragment : Fragment(), HomeContract.View {
                 val totalItemCount = linearLayoutManager.itemCount
                 val firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition()
 
-                if (homePresenter?.isLoading()?.not() == false) {
+                if (homePresenter?.isLoading() == false) {
                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
                             && firstVisibleItemPosition >= 0
                             && totalItemCount >= 10) {
                         homePresenter?.loadMoreGists()
+                        Toast.makeText(context, "ok ira paginar", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
