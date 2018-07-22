@@ -52,17 +52,28 @@ class HomeFragment : Fragment(), HomeContract.View {
 
         homePresenter.attachView(this)
         homePresenter.loadGists()
+
+        try_again_button.setOnClickListener {
+            homePresenter.loadGists()
+        }
     }
 
-
     //region HomeContract.View
-    override fun showMainProgress() = main_progressBar.visible()
+    override fun showMainProgress() {
+        main_progressBar?.visible()
+    }
 
-    override fun hideMainProgress() = main_progressBar.gone()
+    override fun hideMainProgress() {
+        main_progressBar?.gone()
+    }
 
-    override fun showErrorLoadingGists() = error_linearLayout.visible()
+    override fun showErrorLoadingGists() {
+        error_linearLayout?.visible()
+    }
 
-    override fun hideErrorLoadingGists() = error_linearLayout.gone()
+    override fun hideErrorLoadingGists() {
+        error_linearLayout?.gone()
+    }
 
     override fun showToastErrorLoadingGists() =
             Toast.makeText(context, "Error loading gists", Toast.LENGTH_SHORT).show()

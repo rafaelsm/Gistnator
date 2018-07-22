@@ -10,7 +10,7 @@ class HomePresenter(private val service: GistServiceApi,
                     private val schedulerProvider: ScheduleProvider) : HomeContract.Presenter {
 
     private var view: HomeContract.View? = null
-
+private var broke = true
     override fun attachView(view: HomeContract.View) {
         this.view = view
     }
@@ -27,6 +27,13 @@ class HomePresenter(private val service: GistServiceApi,
                 .observeOn(schedulerProvider.ui())
                 .subscribe(
                         {
+                            if (broke){
+                                broke = false
+                                view?.hideMainProgress()
+                                view?.showErrorLoadingGists()
+                                return@subscribe
+                            }
+
                             val gists = it.map {
                                 val fileObj = ((it.files as Map<*, *>).toMap().values.first() as Map<*, *>)
                                 Gist(it.owner.login,
