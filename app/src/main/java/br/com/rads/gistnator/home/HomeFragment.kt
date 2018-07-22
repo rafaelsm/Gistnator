@@ -25,6 +25,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class HomeFragment : Fragment(), HomeContract.View {
 
+    private var homePresenter: HomePresenter? = null
     private var adater: HomeAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -42,20 +43,26 @@ class HomeFragment : Fragment(), HomeContract.View {
                 .build()
 
         val gistApi = retrofit.create(GistServiceApi::class.java)
-        val homePresenter = HomePresenter(gistApi, SchedulerProviderImpl())
+        homePresenter = HomePresenter(gistApi, SchedulerProviderImpl())
 
-        adater = HomeAdapter(mutableListOf()) { homePresenter.gistSelected(it) }
-        context?.let {
-            home_recyclerView.layoutManager = LinearLayoutManager(it, LinearLayoutManager.VERTICAL, false)
-            home_recyclerView.adapter = adater
-        }
-
-        homePresenter.attachView(this)
-        homePresenter.loadGists()
+        adater = HomeAdapter(mutableListOf()) { homePresenter?.gistSelected(it) }
+        home_recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        home_recyclerView.adapter = adater
 
         try_again_button.setOnClickListener {
-            homePresenter.loadGists()
+            homePresenter?.loadGists()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        homePresenter?.attachView(this)
+        homePresenter?.loadGists()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        homePresenter?.detachView()
     }
 
     //region HomeContract.View
