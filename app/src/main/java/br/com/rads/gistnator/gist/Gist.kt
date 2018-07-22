@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Gist(val ownerName: String,
+data class Gist(val gistId: String,
+                val ownerName: String,
                 val gistName: String,
                 val language: String,
                 val rawUrl: String,

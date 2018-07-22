@@ -39,7 +39,8 @@ class HomePresenter(private val service: GistServiceApi,
 
     private fun responseToGist(it: List<GistsResponse>): List<Gist> {
         return it.map {
-            Gist(it.owner.login,
+            Gist(it.id,
+                    it.owner.login,
                     it.files.entries.first().key,
                     it.files.values.first().language ?: "-",
                     it.files.values.first().raw_url,

@@ -10,6 +10,8 @@ import br.com.rads.gistnator.GIST_EXTRA
 import br.com.rads.gistnator.R
 import br.com.rads.gistnator.RAW_FILE_URL_EXTRA
 import br.com.rads.gistnator.gist.Gist
+import br.com.rads.gistnator.gist.datasource.GistDataSource
+import br.com.rads.gistnator.gist.datasource.realm.RealmGistDataSource
 import br.com.rads.gistnator.rawfile.RawFileActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -30,7 +32,7 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         gist_language_textView.text = gist.language
         Picasso.get().load(gist.avatarUrl).into(gist_avatar_imageView)
 
-        detailPresenter = DetailPresenter(gist)
+        detailPresenter = DetailPresenter(gist, RealmGistDataSource())
 
         show_raw_file_button.setOnClickListener {
             detailPresenter?.showRawFileSelected()

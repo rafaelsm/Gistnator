@@ -1,8 +1,9 @@
 package br.com.rads.gistnator.detail
 
 import br.com.rads.gistnator.gist.Gist
+import br.com.rads.gistnator.gist.datasource.GistDataSource
 
-class DetailPresenter(val gist: Gist) : DetailContract.Presenter {
+class DetailPresenter(val gist: Gist, val gistDataSource: GistDataSource) : DetailContract.Presenter {
 
     private var view: DetailContract.View? = null
 
@@ -19,10 +20,12 @@ class DetailPresenter(val gist: Gist) : DetailContract.Presenter {
     }
 
     override fun addToFavorites() {
+        gistDataSource.save(gist)
         view?.gistAddedAsFavorites()
     }
 
     override fun removeFromFavorites() {
+        gistDataSource.delete(gist)
         view?.gistRemovedFromFavorites()
     }
 }

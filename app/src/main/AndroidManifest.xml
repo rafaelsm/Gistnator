@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".GistnatorApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,8 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".detail.DetailActivity" />
-        <activity android:name=".rawfile.RawFileActivity"></activity>
+        <activity
+            android:name=".detail.DetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".rawfile.RawFileActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
