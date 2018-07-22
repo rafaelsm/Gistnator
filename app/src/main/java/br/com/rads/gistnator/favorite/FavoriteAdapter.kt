@@ -9,7 +9,7 @@ import br.com.rads.gistnator.gist.Gist
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cell_favorite_gist.view.*
 
-class FavoriteAdapter(private val gists: List<Gist>,
+class FavoriteAdapter(private val gists: MutableList<Gist>,
                       private val selectGist: (Gist) -> Unit,
                       private val deleteGist: (Gist) -> Unit)
     : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
@@ -23,6 +23,13 @@ class FavoriteAdapter(private val gists: List<Gist>,
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         holder.bind(gists[position])
+    }
+
+    fun remove(gist: Gist) {
+        val position = gists.indexOf(gist)
+        gists.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, itemCount)
     }
 
     inner class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

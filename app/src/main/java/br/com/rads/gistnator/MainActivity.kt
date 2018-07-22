@@ -33,7 +33,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        showHomeFragment()
+        if (supportFragmentManager.fragments.isEmpty()) {
+            showHomeFragment()
+        }
     }
 
     private fun showFavoriteFragment() {

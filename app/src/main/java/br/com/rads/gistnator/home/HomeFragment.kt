@@ -37,6 +37,7 @@ class HomeFragment : Fragment(), HomeContract.View {
         super.onViewCreated(view, savedInstanceState)
 
         homePresenter = HomePresenter(GistServiceApi.getService(), SchedulerProviderImpl())
+        homePresenter?.attachView(this)
 
         adater = HomeAdapter(mutableListOf()) { homePresenter?.gistSelected(it) }
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -47,6 +48,8 @@ class HomeFragment : Fragment(), HomeContract.View {
         try_again_button.setOnClickListener {
             homePresenter?.loadGists()
         }
+
+        homePresenter?.loadGists()
     }
 
     private fun scrollListener(linearLayoutManager: LinearLayoutManager): RecyclerView.OnScrollListener {
@@ -60,24 +63,17 @@ class HomeFragment : Fragment(), HomeContract.View {
                 if (homePresenter?.isLoading() == false) {
                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
                             && firstVisibleItemPosition >= 0
-                            && totalItemCount >= 10) {
+                            && totalItemCount >= PAGINATE) {
                         homePresenter?.loadMoreGists()
-                        Toast.makeText(context, "ok ira paginar", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        homePresenter?.attachView(this)
-        homePresenter?.loadGists()
-    }
-
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroyView() {
         homePresenter?.detachView()
+        super.onDestroyView()
     }
 
     //region HomeContract.View

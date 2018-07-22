@@ -21,6 +21,7 @@ class FavoritePresenter(private val dataSource: GistDataSource) : FavoriteContra
 
     override fun removeFromFavorite(gist: Gist) {
         dataSource.delete(gist)
+        view?.gistRemoved(gist)
     }
 
     override fun gistSelected(gist: Gist) {

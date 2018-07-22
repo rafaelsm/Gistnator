@@ -5,6 +5,8 @@ import br.com.rads.gistnator.gist.GistServiceApi
 import br.com.rads.gistnator.gist.response.GistsResponse
 import br.com.rads.gistnator.rx.ScheduleProvider
 
+val PAGINATE = 5
+
 class HomePresenter(private val service: GistServiceApi,
                     private val schedulerProvider: ScheduleProvider) : HomeContract.Presenter {
 
@@ -58,7 +60,7 @@ class HomePresenter(private val service: GistServiceApi,
         if (loadingMoreGists.not()) {
             loadingMoreGists = true
             index++
-            service.listGists(page = index, paginateSize = 5)
+            service.listGists(page = index, paginateSize = PAGINATE)
                     .subscribeOn(schedulerProvider.io())
                     .observeOn(schedulerProvider.ui())
                     .subscribe(
