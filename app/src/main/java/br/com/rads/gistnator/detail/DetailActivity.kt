@@ -52,6 +52,15 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.detail_menu, menu)
+        menu?.findItem(R.id.menu_favorite)?.apply {
+            if (detailPresenter?.gistIsFavorite() == true) {
+                isChecked = true
+                setIcon(R.drawable.ic_favorite_black_24dp)
+            } else {
+                isChecked = false
+                setIcon(R.drawable.ic_favorite_border_black_24dp)
+            }
+        }
         this.favoriteMenu = menu
         return true
     }

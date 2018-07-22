@@ -40,4 +40,8 @@ class RealmGistDataSource : GistDataSource {
                 }
     }
 
+    override fun contains(gist: Gist): Boolean {
+        val realm = Realm.getDefaultInstance()
+        return realm.where(RealmGist::class.java).equalTo("gistId", gist.gistId).findFirst() != null
+    }
 }

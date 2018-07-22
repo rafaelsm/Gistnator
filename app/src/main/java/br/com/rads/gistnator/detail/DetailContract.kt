@@ -14,5 +14,6 @@ interface DetailContract {
         fun showRawFileSelected()
         fun addToFavorites()
         fun removeFromFavorites()
+        fun gistIsFavorite(): Boolean
     }
 }

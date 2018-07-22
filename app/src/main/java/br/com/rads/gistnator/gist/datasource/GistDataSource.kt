@@ -6,4 +6,5 @@ interface GistDataSource {
     fun save(gist: Gist)
     fun delete(gist: Gist)
     fun listGists(): List<Gist>
+    fun contains(gist: Gist): Boolean
 }

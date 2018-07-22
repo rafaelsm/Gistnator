@@ -28,4 +28,8 @@ class DetailPresenter(val gist: Gist, val gistDataSource: GistDataSource) : Deta
         gistDataSource.delete(gist)
         view?.gistRemovedFromFavorites()
     }
+
+    override fun gistIsFavorite(): Boolean {
+        return gistDataSource.contains(gist)
+    }
 }
