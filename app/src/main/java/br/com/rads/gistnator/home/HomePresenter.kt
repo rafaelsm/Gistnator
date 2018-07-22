@@ -20,6 +20,8 @@ class HomePresenter(private val service: GistServiceApi,
     }
 
     override fun loadGists() {
+        view?.hideErrorLoadingGists()
+        view?.showMainProgress()
         service.listGists()
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
@@ -33,11 +35,14 @@ class HomePresenter(private val service: GistServiceApi,
                                         fileObj["raw_url"].toString(),
                                         it.owner.avatar_url)
                             }
+
+                            view?.hideMainProgress()
                             view?.addGistsToList(gists)
 
                         },
                         {
-                            view?.showToastErrorLoadingGists()
+                            view?.hideMainProgress()
+                            view?.showErrorLoadingGists()
                         })
     }
 

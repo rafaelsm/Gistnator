@@ -14,18 +14,36 @@
         tools:visibility="visible" />
 
     <ProgressBar
+        android:id="@+id/main_progressBar"
         style="?attr/indeterminateProgressStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="visible" />
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/error_linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Error loading gists"
+        android:gravity="center"
+        android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible" />
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Error loading gists"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/try_again_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Try again" />
+
+    </LinearLayout>
+
 
 </FrameLayout>

@@ -15,7 +15,9 @@ import br.com.rads.gistnator.R
 import br.com.rads.gistnator.detail.DetailActivity
 import br.com.rads.gistnator.gist.Gist
 import br.com.rads.gistnator.gist.GistServiceApi
+import br.com.rads.gistnator.gone
 import br.com.rads.gistnator.rx.SchedulerProviderImpl
+import br.com.rads.gistnator.visible
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -27,7 +29,6 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -55,18 +56,16 @@ class HomeFragment : Fragment(), HomeContract.View {
 
 
     //region HomeContract.View
-    override fun hideMainProgress() {
-    }
+    override fun showMainProgress() = main_progressBar.visible()
 
-    override fun showErrorLoadingGists() {
-    }
+    override fun hideMainProgress() = main_progressBar.gone()
 
-    override fun hideErrorLoadingGists() {
-    }
+    override fun showErrorLoadingGists() = error_linearLayout.visible()
 
-    override fun showToastErrorLoadingGists() {
-        Toast.makeText(context, "Error loading gists", Toast.LENGTH_SHORT).show()
-    }
+    override fun hideErrorLoadingGists() = error_linearLayout.gone()
+
+    override fun showToastErrorLoadingGists() =
+            Toast.makeText(context, "Error loading gists", Toast.LENGTH_SHORT).show()
 
     override fun addGistsToList(gists: List<Gist>) {
         home_recyclerView.visibility = View.VISIBLE
@@ -74,7 +73,8 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun openGist(gist: Gist) {
-        startActivity(Intent(activity, DetailActivity::class.java).putExtra(GIST_EXTRA, gist))
+        startActivity(Intent(activity, DetailActivity::class.java)
+                .putExtra(GIST_EXTRA, gist))
     }
     //endregion
 

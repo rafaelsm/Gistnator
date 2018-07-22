@@ -27,6 +27,12 @@ class RawFileActivity : AppCompatActivity(), RawFileContract.View {
         val gistApi = retrofit.create(GistServiceApi::class.java)
 
         presenter = RawFilePresenter(gistApi, SchedulerProviderImpl())
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         presenter?.attachView(this)
         presenter?.loadRawFile(intent.getStringExtra(RAW_FILE_URL_EXTRA))
     }

@@ -5,6 +5,7 @@ import br.com.rads.gistnator.gist.Gist
 interface HomeContract {
 
     interface View {
+        fun showMainProgress()
         fun hideMainProgress()
         fun showErrorLoadingGists()
         fun hideErrorLoadingGists()
