@@ -30,11 +30,10 @@ class HomePresenter(private val service: GistServiceApi,
                         {
 
                             val gists = it.map {
-                                val fileObj = ((it.files as Map<*, *>).toMap().values.first() as Map<*, *>)
                                 Gist(it.owner.login,
-                                        fileObj["filename"].toString(),
-                                        fileObj["language"].toString(),
-                                        fileObj["raw_url"].toString(),
+                                        it.files.entries.first().key,
+                                        it.files.values.first().language ?: "-",
+                                        it.files.values.first().raw_url,
                                         it.owner.avatar_url)
                             }
 

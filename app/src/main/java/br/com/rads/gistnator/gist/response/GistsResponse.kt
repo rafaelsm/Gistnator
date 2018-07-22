@@ -12,7 +12,7 @@ data class GistsResponse(
         val public: Boolean,
         val owner: Owner,
         val user: Any,
-        val files: Any,
+        val files: Map<String, FileContent>,
         val truncated: Boolean,
         val comments: Int,
         val comments_url: String,
