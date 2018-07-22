@@ -2,6 +2,7 @@ package br.com.rads.gistnator.gist
 
 import br.com.rads.gistnator.gist.response.GistsResponse
 import io.reactivex.Observable
+import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Url
 
@@ -11,5 +12,5 @@ interface GistServiceApi {
     fun listGists(): Observable<List<GistsResponse>>
 
     @GET
-    fun rawGist(@Url url: String): Observable<String>
+    fun rawGist(@Url url: String): Observable<ResponseBody>
 }

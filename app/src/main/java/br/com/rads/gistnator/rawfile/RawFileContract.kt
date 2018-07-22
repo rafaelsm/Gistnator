@@ -7,9 +7,12 @@ interface RawFileContract {
         fun hideProgress()
         fun showErrorLayout()
         fun hideErrorLayout()
+        fun showRawFile(raw: String)
     }
 
     interface Presenter {
+        fun attachView(view: View)
+        fun detachView()
         fun loadRawFile(url: String)
     }
 

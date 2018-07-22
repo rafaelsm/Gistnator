@@ -7,6 +7,7 @@
     tools:context=".rawfile.RawFileActivity">
 
     <TextView
+        android:id="@+id/raw_file_textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:text="Raw file" />
