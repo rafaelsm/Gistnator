@@ -18,6 +18,8 @@ interface HomeContract {
         fun attachView(view: View)
         fun detachView()
         fun loadGists()
+        fun loadMoreGists()
         fun gistSelected(gist: Gist)
+        fun isLoading(): Boolean
     }
 }

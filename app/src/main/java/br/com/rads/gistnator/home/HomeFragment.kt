@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +20,8 @@ import br.com.rads.gistnator.gone
 import br.com.rads.gistnator.rx.SchedulerProviderImpl
 import br.com.rads.gistnator.visible
 import kotlinx.android.synthetic.main.fragment_home.*
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
+
 
 class HomeFragment : Fragment(), HomeContract.View {
 
@@ -36,21 +36,35 @@ class HomeFragment : Fragment(), HomeContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.github.com")
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(MoshiConverterFactory.create())
-                .build()
-
-        val gistApi = retrofit.create(GistServiceApi::class.java)
-        homePresenter = HomePresenter(gistApi, SchedulerProviderImpl())
+        homePresenter = HomePresenter(GistServiceApi.getService(), SchedulerProviderImpl())
 
         adater = HomeAdapter(mutableListOf()) { homePresenter?.gistSelected(it) }
-        home_recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        home_recyclerView.layoutManager = linearLayoutManager
         home_recyclerView.adapter = adater
+        home_recyclerView.addOnScrollListener(scrollListener(linearLayoutManager))
 
         try_again_button.setOnClickListener {
             homePresenter?.loadGists()
+        }
+    }
+
+    private fun scrollListener(linearLayoutManager: LinearLayoutManager): RecyclerView.OnScrollListener {
+        return object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val visibleItemCount = linearLayoutManager.childCount
+                val totalItemCount = linearLayoutManager.itemCount
+                val firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition()
+
+                if (homePresenter?.isLoading()?.not() == false) {
+                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
+                            && firstVisibleItemPosition >= 0
+                            && totalItemCount >= 10) {
+                        homePresenter?.loadMoreGists()
+                    }
+                }
+            }
         }
     }
 

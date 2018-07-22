@@ -19,14 +19,7 @@ class RawFileActivity : AppCompatActivity(), RawFileContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_raw_file)
 
-        val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.github.com")
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-
-        val gistApi = retrofit.create(GistServiceApi::class.java)
-
-        presenter = RawFilePresenter(gistApi, SchedulerProviderImpl())
+        presenter = RawFilePresenter(GistServiceApi.getService(), SchedulerProviderImpl())
 
     }
 
