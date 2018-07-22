@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import br.com.rads.gistnator.GIST_EXTRA
 
 import br.com.rads.gistnator.R
 import br.com.rads.gistnator.detail.DetailActivity
@@ -64,7 +65,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun showToastErrorLoadingGists() {
-        Toast.makeText(context, "fuck", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Error loading gists", Toast.LENGTH_SHORT).show()
     }
 
     override fun addGistsToList(gists: List<Gist>) {
@@ -73,7 +74,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun openGist(gist: Gist) {
-        startActivity(Intent(activity, DetailActivity::class.java).putExtra("GIST_EXTRA",gist))
+        startActivity(Intent(activity, DetailActivity::class.java).putExtra(GIST_EXTRA, gist))
     }
     //endregion
 
