@@ -1,6 +1,5 @@
 package br.com.rads.gistnator.home
 
-import android.util.Log
 import br.com.rads.gistnator.gist.Gist
 import br.com.rads.gistnator.gist.GistServiceApi
 import br.com.rads.gistnator.gist.response.GistsResponse
@@ -66,11 +65,9 @@ class HomePresenter(private val service: GistServiceApi,
                                 view?.addGistsToList(responseToGist(it))
                             },
                             {
-                                Log.e("Teste", "ruim paginacao")
                                 index--
                             },
                             {
-                                Log.e("Teste", "complete")
                                 loadingMoreGists = false
                             })
         }

@@ -18,11 +18,11 @@ class DetailPresenter(val gist: Gist) : DetailContract.Presenter {
         view?.openRawFile(gist.rawUrl)
     }
 
-    override fun addToFavorites(gist: Gist) {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun addToFavorites() {
+        view?.gistAddedAsFavorites()
     }
 
-    override fun removeFromFavorites(gist: Gist) {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun removeFromFavorites() {
+        view?.gistRemovedFromFavorites()
     }
 }
