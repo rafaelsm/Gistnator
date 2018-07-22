@@ -9,13 +9,13 @@ class RealmGistDataSource : GistDataSource {
     override fun save(gist: Gist) {
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
-        val realmGist1 = realm.createObject(RealmGist::class.java)
-        realmGist1.gistId = gist.gistId
-        realmGist1.ownerName = gist.ownerName
-        realmGist1.gistName = gist.gistName
-        realmGist1.language = gist.language
-        realmGist1.rawUrl = gist.rawUrl
-        realmGist1.avatarUrl = gist.avatarUrl
+        val realmGist = realm.createObject(RealmGist::class.java)
+        realmGist.gistId = gist.gistId
+        realmGist.ownerName = gist.ownerName
+        realmGist.gistName = gist.gistName
+        realmGist.language = gist.language
+        realmGist.rawUrl = gist.rawUrl
+        realmGist.avatarUrl = gist.avatarUrl
         realm.commitTransaction()
     }
 

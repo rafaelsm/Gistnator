@@ -11,6 +11,8 @@ interface FavoriteContract {
     }
 
     interface Presenter {
+        fun attachView(view: View)
+        fun detachView()
         fun loadFavoriteGists()
         fun removeFromFavorite(gist: Gist)
         fun gistSelected(gist: Gist)
