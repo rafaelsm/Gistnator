@@ -22,15 +22,7 @@ class HomeAdapter(private val gists: MutableList<Gist>,
     override fun getItemCount(): Int = gists.size
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        val gist = gists[position]
-        holder.itemView.gist_owner_name_textView.text = gist.ownerName
-        holder.itemView.gist_name_textView.text = gist.gistName
-        holder.itemView.gist_language_textView.text = gist.language
-        Picasso.get().load(gist.avatarUrl).into(holder.itemView.gist_avatar_imageView)
-
-        holder.itemView.setOnClickListener {
-            action(gist)
-        }
+        holder.bind(gists[position])
     }
 
     fun addAll(newGists: List<Gist>) {
@@ -39,6 +31,19 @@ class HomeAdapter(private val gists: MutableList<Gist>,
         notifyItemRangeChanged(index, newGists.size)
     }
 
-    inner class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        fun bind(gist: Gist) {
+            itemView.gist_owner_name_textView.text = gist.ownerName
+            itemView.gist_name_textView.text = gist.gistName
+            itemView.gist_language_textView.text = gist.language
+            Picasso.get().load(gist.avatarUrl).into(itemView.gist_avatar_imageView)
+
+            itemView.setOnClickListener {
+                action(gist)
+            }
+        }
+
+    }
 
 }

@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, favoriteFragment)
-                .addToBackStack(null)
                 .commit()
     }
 
@@ -50,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, aboutFragment)
-                .addToBackStack(null)
                 .commit()
     }
 
@@ -58,7 +56,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, homeFragment)
-                .addToBackStack(null)
                 .commit()
     }
 }
