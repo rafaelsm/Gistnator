@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".rawfile.RawFileActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/raw_file_textView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:text="Raw file" />
+        tools:context=".rawfile.RawFileActivity">
 
-</ScrollView>
+        <TextView
+            android:id="@+id/raw_file_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Raw file" />
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/error_linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Error loading gists"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/try_again_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Try again" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/raw_progressBar"
+        style="?attr/indeterminateProgressStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+</FrameLayout>

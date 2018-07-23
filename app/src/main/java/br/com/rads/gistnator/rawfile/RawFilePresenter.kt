@@ -1,6 +1,5 @@
 package br.com.rads.gistnator.rawfile
 
-import android.util.Log
 import br.com.rads.gistnator.gist.GistServiceApi
 import br.com.rads.gistnator.rx.ScheduleProvider
 
@@ -18,7 +17,8 @@ class RawFilePresenter(private val serviceApi: GistServiceApi,
     }
 
     override fun loadRawFile(url: String) {
-        Log.d("TESTE", "raw file url $url")
+        view?.showProgress()
+        view?.hideErrorLayout()
         serviceApi.rawGist(url)
                 .subscribeOn(scheduleProvider.io())
                 .observeOn(scheduleProvider.ui())
