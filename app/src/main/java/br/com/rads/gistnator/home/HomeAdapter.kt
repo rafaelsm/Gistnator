@@ -37,7 +37,9 @@ class HomeAdapter(private val gists: MutableList<Gist>,
             itemView.gist_owner_name_textView.text = gist.ownerName
             itemView.gist_name_textView.text = gist.gistName
             itemView.gist_language_textView.text = gist.language
-            Picasso.get().load(gist.avatarUrl).into(itemView.gist_avatar_imageView)
+            Picasso.get().load(gist.avatarUrl)
+                    .placeholder(R.drawable.github_placeholder)
+                    .into(itemView.gist_avatar_imageView)
 
             itemView.setOnClickListener {
                 action(gist)

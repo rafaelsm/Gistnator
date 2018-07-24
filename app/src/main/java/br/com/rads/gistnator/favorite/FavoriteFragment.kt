@@ -30,6 +30,10 @@ class FavoriteFragment : Fragment(), FavoriteContract.View {
         super.onViewCreated(view, savedInstanceState)
         presenter = FavoritePresenter(RealmGistDataSource())
         presenter?.attachView(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
         presenter?.loadFavoriteGists()
     }
 
