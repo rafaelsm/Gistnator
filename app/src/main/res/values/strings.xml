@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gistnator</string>
+    <!--<string name="app_name">Gistnator</string>-->
 
     <!-- bottom navigation view -->
     <string name="title_home">Home</string>
