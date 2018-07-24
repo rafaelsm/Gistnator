@@ -49,11 +49,24 @@ class HomeFragmentTest {
     }
 
     @Test
-    fun retryWorking() {
+    fun selectGistFromList() {
         RESTMockServer.whenGET(RequestMatchers.pathContains("gists")).thenReturnFile(200, "home/gist_list_success.json")
         activityTestRule.launchActivity(null)
         onView(withId(R.id.home_recyclerView))
                 .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.show_raw_file_button)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun retryWorking() {
+        RESTMockServer.whenGET(RequestMatchers.pathContains("gists"))
+                .thenReturnEmpty(500)
+                .thenReturnFile(200, "home/gist_list_success.json")
+        activityTestRule.launchActivity(null)
+
+        onView(withId(R.id.error_linearLayout)).check(matches(isDisplayed()))
+        onView(withId(R.id.try_again_button)).perform(click())
+        onView(withId(R.id.error_linearLayout)).check(matches(not(isDisplayed())))
+        onView(withText("octocat")).check(matches(isDisplayed()))
     }
 }
