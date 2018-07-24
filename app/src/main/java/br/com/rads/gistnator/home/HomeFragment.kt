@@ -94,7 +94,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun showToastErrorLoadingGists() =
-            Toast.makeText(context, "Error loading gists", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.toast_error_loading_gists, Toast.LENGTH_SHORT).show()
 
     override fun addGistsToList(gists: List<Gist>) {
         home_recyclerView.visibility = View.VISIBLE

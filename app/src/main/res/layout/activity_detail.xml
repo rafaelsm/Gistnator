@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".detail.DetailActivity">
 
-
     <ImageView
         android:id="@+id/gist_avatar_imageView"
         android:layout_width="128dp"
@@ -16,6 +15,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:contentDescription="@string/cd_user_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,10 +30,10 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gist_avatar_imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/gist_avatar_imageView"
+        tools:text="Owner name" />
 
     <TextView
         android:id="@+id/gist_name_textView"
@@ -44,10 +44,10 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gist_owner_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/gist_owner_textView"
+        tools:text="Gist name" />
 
     <TextView
         android:id="@+id/gist_language_textView"
@@ -58,10 +58,10 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gist_name_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/gist_name_textView"
+        tools:text="Gist language" />
 
     <Button
         android:id="@+id/show_raw_file_button"
@@ -72,7 +72,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:text="Show raw file"
+        android:text="@string/button_show_raw_file"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

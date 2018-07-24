@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="32dp"
-        android:text="Something about the app" />
+        android:text="@string/label_about" />
 
     <Button
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Logout" />
+        android:text="@string/button_logout" />
 
 </LinearLayout>
