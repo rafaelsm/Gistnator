@@ -1,5 +1,6 @@
 package br.com.rads.gistnator.gist
 
+import br.com.rads.gistnator.UrlProvider
 import br.com.rads.gistnator.gist.response.GistsResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody
@@ -21,7 +22,7 @@ interface GistServiceApi {
     companion object {
         fun getService(): GistServiceApi {
             val retrofit = Retrofit.Builder()
-                    .baseUrl("https://api.github.com")
+                    .baseUrl(UrlProvider.baseUrl)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(MoshiConverterFactory.create())
                     .build()
