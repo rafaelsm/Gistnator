@@ -11,7 +11,7 @@
     <string name="button_show_raw_file">Show raw file</string>
     <string name="button_try_again">Try again</string>
     <string name="button_logout">Logout</string>
-    
+
     <string name="label_error_loading_gists">Error loading gists</string>
     <string name="label_about">Something about the app</string>
 
