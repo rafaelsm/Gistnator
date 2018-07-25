@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="LanguageCustomView">
+        <attr name="language" format="string" />
+    </declare-styleable>
+</resources>

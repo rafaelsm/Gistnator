@@ -4,14 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import br.com.rads.gistnator.about.AboutFragment
 import br.com.rads.gistnator.favorite.FavoriteFragment
-import br.com.rads.gistnator.gist.GistServiceApi
 import br.com.rads.gistnator.home.HomeFragment
-import br.com.rads.gistnator.home.HomePresenter
-import br.com.rads.gistnator.rx.SchedulerProviderImpl
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
